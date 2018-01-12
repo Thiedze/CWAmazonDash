@@ -11,7 +11,7 @@ cwAmazonDashControllers.controller('groupController', function($rootScope, $scop
 	};
 
 	$scope.getNumber = function(number) {
-		return new Array(number);
+		return new Array(parseInt(number));
 	};
 
 	$scope.hasDashButton = function(group, row, column) {
@@ -31,7 +31,7 @@ cwAmazonDashControllers.controller('groupController', function($rootScope, $scop
 			}
 		}
 
-		return "images/amazon_dash.png";
+		return "images/amazon_dash_white.png";
 	};
 
 });

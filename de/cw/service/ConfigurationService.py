@@ -33,7 +33,7 @@ class ConfigurationService(object):
         print(items)
         for section in self.config_parser.sections():
             print(section.split("_"))
-            group = Group(section.split("_")[1])
+            group = Group(section.split("_")[2], section.split("_")[1])
             for (key, value) in self.config_parser.items(section):
                 for item in items:
                     if item.ASIN.text == value:

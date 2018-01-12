@@ -31,10 +31,10 @@
 	{% raw %}
 	<div class="container-fluid">
 		<div ng-class="getGroupCssClass($index)" class="well" ng-repeat="group in groups">
-			<div class="container-fluid">
+			<div class="container-fluid row">
 				<table class="table borderless">
 					<tr ng-class="getGroupCssClass($parent.$parent.$index)">
-						<td ng-repeat="row in getNumber(6) track by $index">
+						<td ng-repeat="row in getNumber(group.rows) track by $index">
 							<table class="table borderless">
 								<tbody>
 									<tr ng-repeat="column in getNumber(3) track by $index">
@@ -50,6 +50,11 @@
 							</table>
 						</td>
 					</tr>
+					<thead>
+						<tr>
+							<td colspan="{{group.rows}}" class="group-label">{{group.name}}</td>
+						</tr>
+					</thead>
 				</table>
 				<!-- <div ng-repeat="dash_button in group.dash_buttons">{{dash_button.asin}}</div>
 				{{group.name}} -->
