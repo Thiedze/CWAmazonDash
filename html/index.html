@@ -13,19 +13,49 @@
 <!-- JQuery end -->
 <!-- Bootstrap start -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!-- Bootstrap end -->
 <!-- Angular start -->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-resource.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.min.js"></script>
 <!-- Angular end -->
 <!-- Custom -->
 <link rel="stylesheet" href="css/cwAmazonDash.css">
 <script src="js/cwAmazonDashApp.js"></script>
+<script src="js/groupController.js"></script>
+<script src="js/service.js"></script>
 </head>
-<body class="background">
-	<div class="container">
-	
+<body class="background" ng-controller="groupController">
+	{% raw %}
+	<div class="container-fluid">
+		<div ng-class="getGroupCssClass($index)" class="well" ng-repeat="group in groups">
+			<div class="container-fluid">
+				<table class="table borderless">
+					<tr ng-class="getGroupCssClass($parent.$parent.$index)">
+						<td ng-repeat="row in getNumber(6) track by $index">
+							<table class="table borderless">
+								<tbody>
+									<tr ng-repeat="column in getNumber(3) track by $index">
+										<td ng-class="getGroupCssClass($parent.$parent.$index)">
+											<div class="img-container">
+												<img class="dash_button dash_button_mask top" ng-class="getGroupCssClass($parent.$parent.$index)"
+													ng-src="{{getImageUrl(group, $parent.$index, $index)}}" alt="Dash Button"> <img class="dash_button bottom"
+													ng-class="getGroupCssClass($parent.$parent.$index)" ng-src="images/amazon_dash.png" alt="Dash Button">
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</td>
+					</tr>
+				</table>
+				<!-- <div ng-repeat="dash_button in group.dash_buttons">{{dash_button.asin}}</div>
+				{{group.name}} -->
+			</div>
+		</div>
 	</div>
+	{% endraw %}
 </body>
 </html>

@@ -37,8 +37,8 @@ class ConfigurationService(object):
             for (key, value) in self.config_parser.items(section):
                 for item in items:
                     if item.ASIN.text == value:
-                        group.dash_buttons.append(DashButton(key, value, item.MediumImage.URL))
+                        group.dash_buttons.append(DashButton(key.split("_")[0], key.split("_")[1], value, item.LargeImage.URL))
             group.dash_buttons.sort()
-            print([dash_button.number for dash_button in group.dash_buttons])
+            print([(dash_button.row, dash_button.column) for dash_button in group.dash_buttons])
             groups.append(group)
         return groups

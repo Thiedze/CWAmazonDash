@@ -20,7 +20,8 @@ class DashJSONEncoder(JSONEncoder):
             }
         elif isinstance(obj, DashButton):
             return {
-                'number' : obj.number,
+                'row' : obj.row,
+                'column' : obj.column,
                 'asin' : obj.asin,
                 'image_url' : "'" + obj.image_url + "'"
             }

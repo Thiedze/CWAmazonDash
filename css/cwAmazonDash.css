@@ -1,12 +1,57 @@
 @CHARSET "ISO-8859-1";
 
+body {
+	margin-top: 20px;
+}
+
 .background {
 	background: #FFFFFF;
 }
 
-.group {
-	background: #E1E2E1;
+.group-0 {
+	background: #ffe082;
 }
-.groupLabel {
-	background : #FFCA28;
+
+.group-1 {
+	background: #f44336;
+}
+
+.group-2 {
+	background: #80deea;
+}
+
+.group-label {
+	background: #000000;
+}
+
+.dash_button {
+	padding: 3px;
+	width: 270px;
+	height: 120px;
+	object-fit: cover;
+}
+
+img {
+	display: block;
+}
+
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th,
+	.table>thead>tr>td, .table>thead>tr>th {
+	border: none;
+	padding: 0px;
+}
+
+.dash_button_mask {
+	-webkit-mask-box-image: url(amazon_dash_mask.png);
+}
+
+.img-container {
+	position: relative;
+}
+
+.img-container .top {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
 }
