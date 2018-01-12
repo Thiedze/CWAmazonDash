@@ -1,0 +1,12 @@
+@CHARSET "ISO-8859-1";
+
+.background {
+	background: #FFFFFF;
+}
+
+.group {
+	background: #E1E2E1;
+}
+.groupLabel {
+	background : #FFCA28;
+}
