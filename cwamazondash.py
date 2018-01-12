@@ -29,6 +29,11 @@ def get_css_files(path):
     return send_from_directory('css', path)
 
 
+@app.route('/images/<path:path>')
+def get_images_files(path):
+    return send_from_directory('images', path)
+
+
 @app.route('/rest/v1/groups', methods=['GET'])
 def get_groups():
     return make_response(jsonify(configuration_service.get_groups()), 200)
