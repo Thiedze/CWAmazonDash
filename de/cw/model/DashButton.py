@@ -7,7 +7,7 @@ Created on 11.01.2018
 
 class DashButton(object):
 
-    def __init__(self, row, column, asin, image_url):
+    def __init__(self, column, row, asin, image_url):
         self.row = row
         self.column = column
         self.asin = asin

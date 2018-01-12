@@ -1,11 +1,12 @@
 @CHARSET "ISO-8859-1";
 
-body {
-	margin-top: 20px;
-}
-
 .background {
 	background: #FFFFFF;
+}
+
+.group {
+	border-radius: 25px;
+	margin: 20px;
 }
 
 .group-0 {

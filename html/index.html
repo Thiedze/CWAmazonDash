@@ -1,10 +1,7 @@
 <html lang="en" ng-app="cwAmazonDashApp">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<meta http-equiv="cache-control" content="no-cache" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="CW Amazon Dash">
 <meta name="author" content="Sebastian Thiems">
 <title>CW Amazon Dash</title>
@@ -13,6 +10,8 @@
 <!-- JQuery end -->
 <!-- Bootstrap start -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!-- Bootstrap end -->
 <!-- Angular start -->
@@ -30,34 +29,19 @@
 <body class="background" ng-controller="groupController">
 	{% raw %}
 	<div class="container-fluid">
-		<div ng-class="getGroupCssClass($index)" class="well" ng-repeat="group in groups">
-			<div class="container-fluid row">
-				<table class="table borderless">
-					<tr ng-class="getGroupCssClass($parent.$parent.$index)">
-						<td ng-repeat="row in getNumber(group.rows) track by $index">
-							<table class="table borderless">
-								<tbody>
-									<tr ng-repeat="column in getNumber(3) track by $index">
-										<td ng-class="getGroupCssClass($parent.$parent.$index)">
-											<div class="img-container">
-												<img class="dash_button dash_button_mask top" ng-class="getGroupCssClass($parent.$parent.$index)"
-													ng-src="{{getImageUrl(group, $parent.$index, $index)}}" alt="Dash Button"> <img class="dash_button bottom"
-													ng-class="getGroupCssClass($parent.$parent.$index)" ng-src="images/amazon_dash.png" alt="Dash Button">
-											</div>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-						</td>
-					</tr>
-					<thead>
-						<tr>
-							<td colspan="{{group.rows}}" class="group-label">{{group.name}}</td>
-						</tr>
-					</thead>
-				</table>
-				<!-- <div ng-repeat="dash_button in group.dash_buttons">{{dash_button.asin}}</div>
-				{{group.name}} -->
+		<div class="row-lg-12">
+			<div ng-repeat="group in groups">
+				<div ng-class="getGroupCssClass($index) + ' ' + getGroupClass(group.columns)" class="group">
+					<div class="row" ng-repeat="row in getNumber(3) track by $index">
+						<div ng-class="getColumnClass(group.columns)" ng-repeat="column in getNumber(group.columns) track by $index">
+							<div class="img-container">
+								<img class="dash_button dash_button_mask top" ng-class="getGroupCssClass($parent.$parent.$index)"
+									ng-src="{{getImageUrl(group, $parent.$index, $index)}}" alt="Dash Button"> <img class="dash_button bottom"
+									ng-class="getGroupCssClass($parent.$parent.$index)" ng-src="images/amazon_dash.png" alt="Dash Button">
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -16,7 +16,7 @@ class DashJSONEncoder(JSONEncoder):
         if isinstance(obj, Group):
             return {
                 'name': obj.name,
-                'rows': obj.rows,
+                'columns': obj.columns,
                 'dash_buttons': obj.dash_buttons
             }
         elif isinstance(obj, DashButton):

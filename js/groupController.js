@@ -34,4 +34,13 @@ cwAmazonDashControllers.controller('groupController', function($rootScope, $scop
 		return "images/amazon_dash_white.png";
 	};
 
+	$scope.getColumnClass = function(columns) {
+		return "col-lg-" + (12 / parseInt(columns));
+	}
+
+	$scope.getGroupClass = function(columns) {
+		return "col-lg-" + (parseInt(columns) * 2);
+
+	}
+
 });
