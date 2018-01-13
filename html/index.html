@@ -29,9 +29,10 @@
 <body class="background" ng-controller="groupController">
 	{% raw %}
 	<div class="container-fluid">
-		<div class="row-lg-12">
-			<div ng-repeat="group in groups">
-				<div ng-class="getGroupCssClass($index) + ' ' + getGroupClass(group.columns)" class="group">
+		<div ng-repeat="group in groups">
+			<div class="container-fluid" ng-class="getGroupClass(group.columns)">
+				<span class="group-label row">{{group.name}}</span>
+				<div ng-class="getGroupCssClass($index)" class="group">
 					<div class="row" ng-repeat="row in getNumber(3) track by $index">
 						<div ng-class="getColumnClass(group.columns)" ng-repeat="column in getNumber(group.columns) track by $index">
 							<div class="img-container">
