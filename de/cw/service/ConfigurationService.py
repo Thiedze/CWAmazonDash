@@ -19,6 +19,10 @@ class ConfigurationService(object):
         self.config_parser.read('configuration.ini')
         self.amazon_api = amazonproduct.API(locale='de')
         
+    def reloadConfigParser(self):
+        self.config_parser = ConfigParser.RawConfigParser()
+        self.config_parser.read('configuration.ini')
+    
     def get_asins(self):
         asins = list()
         for section in self.config_parser.sections():
@@ -27,9 +31,22 @@ class ConfigurationService(object):
         print(",".join(asins))
         return ",".join(asins)
         
+    def create_dash_button(self, item, column, row):
+        dash_button = DashButton(column, row, item.ASIN.text)
+        if item.LargeImage != None :
+            dash_button.image_url = item.LargeImage.URL.text
+            
+        if item.ItemAttributes != None:
+            dash_button.title = item.ItemAttributes.Title.text
+            if item.ItemAttributes.ListPrice != None:
+                dash_button.price = item.ItemAttributes.ListPrice.FormattedPrice.text
+        
+        return dash_button
+        
     def get_groups(self):
+        self.reloadConfigParser()
         groups = list()
-        items = self.amazon_api.item_lookup(self.get_asins(), ResponseGroup='Images', Condition='All').Items.Item
+        items = self.amazon_api.item_lookup(self.get_asins(), ResponseGroup='Images, ItemAttributes, OfferFull', Condition='All').Items.Item
         print(items)
         for section in self.config_parser.sections():
             print(section.split("_"))
@@ -37,7 +54,7 @@ class ConfigurationService(object):
             for (key, value) in self.config_parser.items(section):
                 for item in items:
                     if item.ASIN.text == value:
-                        group.dash_buttons.append(DashButton(key.split("_")[0], key.split("_")[1], value, item.LargeImage.URL))
+                        group.dash_buttons.append(self.create_dash_button(item, key.split("_")[0], key.split("_")[1]))
             group.dash_buttons.sort()
             print([(dash_button.row, dash_button.column) for dash_button in group.dash_buttons])
             groups.append(group)

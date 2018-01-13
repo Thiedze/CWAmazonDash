@@ -23,8 +23,10 @@ class DashJSONEncoder(JSONEncoder):
             return {
                 'row' : obj.row,
                 'column' : obj.column,
+                'title' : obj.title,
+                'price' : obj.price,
                 'asin' : obj.asin,
-                'image_url' : "'" + obj.image_url + "'"
+                'image_url' : obj.image_url
             }
         
         return super(DashJSONEncoder, self).default(obj)

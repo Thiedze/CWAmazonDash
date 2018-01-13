@@ -30,15 +30,22 @@
 	{% raw %}
 	<div class="container-fluid">
 		<div ng-repeat="group in groups">
-			<div class="container-fluid" ng-class="getGroupClass(group.columns)">
-				<span class="group-label row">{{group.name}}</span>
+			<div class="container-fluid group" ng-class="getGroupClass(group.columns)">
 				<div ng-class="getGroupCssClass($index)" class="group">
+					<span class="group-label col-lg-12">{{group.name}}</span>
 					<div class="row" ng-repeat="row in getNumber(3) track by $index">
 						<div ng-class="getColumnClass(group.columns)" ng-repeat="column in getNumber(group.columns) track by $index">
 							<div class="img-container">
 								<img class="dash_button dash_button_mask top" ng-class="getGroupCssClass($parent.$parent.$index)"
 									ng-src="{{getImageUrl(group, $parent.$index, $index)}}" alt="Dash Button"> <img class="dash_button bottom"
 									ng-class="getGroupCssClass($parent.$parent.$index)" ng-src="images/amazon_dash.png" alt="Dash Button">
+								<button type="button" class="btn btn-default btn-circle btn-xl" ng-class="getButtonCssClass($parent.$parent.$index)">
+									<i class="glyphicon glyphicon-plus add_icon"></i>
+								</button>
+								<div class="overlay info_text">
+									<div class="price">{{getDashButtonPrice(group, $parent.$index, $index)}}</div>
+									<div class="title">{{getDashButtonTitle(group, $parent.$index, $index)}}</div>
+								</div>
 							</div>
 						</div>
 					</div>

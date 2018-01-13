@@ -10,28 +10,62 @@ cwAmazonDashControllers.controller('groupController', function($rootScope, $scop
 		return "group-" + (index % 3);
 	};
 
+	$scope.getButtonCssClass = function(index) {
+		return "add_button-" + ((index) % 3);
+	}
+
 	$scope.getNumber = function(number) {
 		return new Array(parseInt(number));
 	};
 
-	$scope.hasDashButton = function(group, row, column) {
+	$scope.getDashButton = function(group, row, column) {
 		for (var index = 0; index < group.dash_buttons.length; index++) {
 			if (parseInt(group.dash_buttons[index].row) === row && parseInt(group.dash_buttons[index].column) === column) {
-				return true;
+				return group.dash_buttons[index];
 			}
 		}
 
-		return false;
+		return null;
+	}
+
+	$scope.hasDashButton = function(group, row, column) {
+		var dashButton = $scope.getDashButton(group, row, column);
+
+		if (dashButton != null) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	$scope.getDashButtonTitle = function(group, row, column) {
+		var dashButton = $scope.getDashButton(group, row, column);
+
+		if (dashButton != null) {
+			return dashButton.title;
+		} else {
+			return "No dash button configured";
+		}
+	}
+
+	$scope.getDashButtonPrice = function(group, row, column) {
+		var dashButton = $scope.getDashButton(group, row, column);
+
+		if (dashButton != null) {
+			return dashButton.price;
+		} else {
+			return null;
+		}
 	}
 
 	$scope.getImageUrl = function(group, row, column) {
-		for (var index = 0; index < group.dash_buttons.length; index++) {
-			if (parseInt(group.dash_buttons[index].row) === row && parseInt(group.dash_buttons[index].column) === column) {
-				return group.dash_buttons[index].image_url.replace(/'/g, "");
-			}
-		}
+		var dashButton = $scope.getDashButton(group, row, column);
 
-		return "images/amazon_dash_white.png";
+		if (dashButton != null) {
+			return dashButton.image_url;
+		} else {
+			return "images/amazon_dash_white.png";
+		}
 	};
 
 	$scope.getColumnClass = function(columns) {

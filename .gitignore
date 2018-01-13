@@ -102,3 +102,4 @@ ENV/
 settings.ini
 *.project
 .pydevproject
+*.prefs
