@@ -22,11 +22,12 @@
 <!-- Angular end -->
 <!-- Custom -->
 <link rel="stylesheet" href="css/cwAmazonDash.css">
+<link rel="stylesheet" href="css/snackbar.css">
 <script src="js/cwAmazonDashApp.js"></script>
-<script src="js/groupController.js"></script>
+<script src="js/cwAmazonDashController.js"></script>
 <script src="js/service.js"></script>
 </head>
-<body class="background" ng-controller="groupController">
+<body class="background" ng-controller="cwAmazonDashController">
 	{% raw %}
 	<div class="container-fluid">
 		<div ng-repeat="group in groups">
@@ -39,12 +40,15 @@
 								<img class="dash_button dash_button_mask top" ng-class="getGroupCssClass($parent.$parent.$index)"
 									ng-src="{{getImageUrl(group, $parent.$index, $index)}}" alt="Dash Button"> <img class="dash_button bottom"
 									ng-class="getGroupCssClass($parent.$parent.$index)" ng-src="images/amazon_dash.png" alt="Dash Button">
-								<button type="button" class="btn btn-default btn-circle btn-xl" ng-class="getButtonCssClass($parent.$parent.$index)">
+								<button type="button" class="btn btn-default btn-circle btn-xl" ng-class="getButtonCssClass($parent.$parent.$index)"
+									ng-click="addToCart(group, $parent.$index, $index)">
 									<i class="glyphicon glyphicon-plus add_icon"></i>
 								</button>
 								<div class="overlay info_text">
-									<div class="price">{{getDashButtonPrice(group, $parent.$index, $index)}}</div>
-									<div class="title">{{getDashButtonTitle(group, $parent.$index, $index)}}</div>
+									<div class="price_title">
+										<div class="price">{{getDashButtonPrice(group, $parent.$index, $index)}}</div>
+										<div class="title">{{getDashButtonTitle(group, $parent.$index, $index)}}</div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -52,6 +56,7 @@
 				</div>
 			</div>
 		</div>
+		<div id="snackbar" ng-class="{ 'show' : showSnackbar}">{{snackbarMessage}}</div>
 	</div>
 	{% endraw %}
 </body>

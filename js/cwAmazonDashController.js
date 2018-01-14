@@ -1,4 +1,6 @@
-cwAmazonDashControllers.controller('groupController', function($rootScope, $scope, AmazonService) {
+cwAmazonDashControllers.controller('cwAmazonDashController', function($scope, $timeout, AmazonService) {
+
+	$scope.showSnackbar = false;
 
 	AmazonService.groups(function(data) {
 		$scope.groups = data;
@@ -26,7 +28,7 @@ cwAmazonDashControllers.controller('groupController', function($rootScope, $scop
 		}
 
 		return null;
-	}
+	};
 
 	$scope.hasDashButton = function(group, row, column) {
 		var dashButton = $scope.getDashButton(group, row, column);
@@ -36,7 +38,7 @@ cwAmazonDashControllers.controller('groupController', function($rootScope, $scop
 		} else {
 			return false;
 		}
-	}
+	};
 
 	$scope.getDashButtonTitle = function(group, row, column) {
 		var dashButton = $scope.getDashButton(group, row, column);
@@ -46,7 +48,7 @@ cwAmazonDashControllers.controller('groupController', function($rootScope, $scop
 		} else {
 			return "No dash button configured";
 		}
-	}
+	};
 
 	$scope.getDashButtonPrice = function(group, row, column) {
 		var dashButton = $scope.getDashButton(group, row, column);
@@ -56,7 +58,7 @@ cwAmazonDashControllers.controller('groupController', function($rootScope, $scop
 		} else {
 			return null;
 		}
-	}
+	};
 
 	$scope.getImageUrl = function(group, row, column) {
 		var dashButton = $scope.getDashButton(group, row, column);
@@ -68,13 +70,38 @@ cwAmazonDashControllers.controller('groupController', function($rootScope, $scop
 		}
 	};
 
+	$scope.addToCart = function(group, row, column) {
+		var dashButton = $scope.getDashButton(group, row, column);
+
+		if (dashButton != null) {
+
+		} else {
+			$scope.snackbarMessage = "No DashButton configured.";
+			$scope.showSnackbar = true;
+
+			$scope.startSnackbarTimeout();
+		}
+	};
+
+	$scope.startSnackbarTimeout = function() {
+		$timeout(function() {
+			if ($scope.showSnackbar == true) {
+				$scope.showSnackbar = false;
+				$scope.snackbarMessage = null;
+			}
+		}, 3000);
+	};
+
 	$scope.getColumnClass = function(columns) {
 		return "col-lg-" + (12 / parseInt(columns));
-	}
+	};
 
 	$scope.getGroupClass = function(columns) {
 		return "col-lg-" + (parseInt(columns) * 2);
+	};
 
-	}
+	$('.popover-dismiss').popover({
+		trigger : 'focus'
+	})
 
 });
